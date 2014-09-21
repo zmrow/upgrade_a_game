@@ -50,6 +50,12 @@ $(function() {
     }
   };
 
+  function replaceText(message) {
+    $("p").fadeOut(600, function() {
+      $(this).text(message)
+      $(this).fadeIn();
+    });
+  }
   // Define our runner/tackler.
   var RB = new Player("Marshawn", 8, 0, 7);
   var LB = new Player("Aldon", 5, 3, 0);
@@ -60,8 +66,10 @@ $(function() {
 
   //alert("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot on his tail!")
 
-  function start_play() {
+  function startPlay() {
+    $("p").fadeOut(500).html("");
     // Start the play!
+    $("p").text("< /br> Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot in his tail!").fadeIn();
     while (RB.down === false && RB.fieldPosition < 100) {
       RB.run();
 
@@ -75,4 +83,10 @@ $(function() {
       runPlay(RB,LB);
     }
   };
+
+
+  $("#go").click(function() {
+      $(this).text("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot in his tail!")
+    //startPlay();
+  })
 });
