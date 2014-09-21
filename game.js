@@ -1,4 +1,4 @@
-<script>
+$(function() {
   // Build the Player class
   function Player(name, speed, tackleChance, tackleAvoid) {
     this.name = name;
@@ -56,21 +56,23 @@
   yards = 100;
 
   // Set the stage for our intense play....
-  alert("The Seahawks are on the 49ers 20 yard line and need to score here to win the game!  Hit ok when you're ready to hike the ball!")
+  //alert("The Seahawks are on the 49ers 20 yard line and need to score here to win the game!  Hit ok when you're ready to hike the ball!")
 
-  alert("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot on his tail!")
+  //alert("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot on his tail!")
 
-  // Start the play!
-  while (RB.down === false && RB.fieldPosition < 100) {
-    RB.run();
+  function start_play() {
+    // Start the play!
+    while (RB.down === false && RB.fieldPosition < 100) {
+      RB.run();
 
-    if (RB.fieldPosition >= 100) { // Break the loop if RB is in the end zone
-      alert(RB.name + " SCORES!! The Seahawks win and the crowd goes WILD!!");
-      break;
+      if (RB.fieldPosition >= 100) { // Break the loop if RB is in the end zone
+        alert(RB.name + " SCORES!! The Seahawks win and the crowd goes WILD!!");
+        break;
+      }
+
+      alert(RB.name + " is at the " + RB.currentFieldPos() + " yard line! He's fighting hard...");
+      LB.run();
+      runPlay(RB,LB);
     }
-
-    alert(RB.name + " is at the " + RB.currentFieldPos() + " yard line! He's fighting hard...");
-    LB.run();
-    runPlay(RB,LB);
   };
-</script>
+});
