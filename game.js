@@ -39,21 +39,23 @@ $(function() {
 
   function attemptTackle(runner,tackler) {
     if (runner.tackleAvoid > tackler.tackleChance) {
-      confirm(runner.name + " breaks a tackle!");
+      replaceText(runner.name + " breaks a tackle!");
       // Set random stats for runner and tackler here so outcome isn't
       // constantly the same.
       setRandomStats(runner, tackler);
     }
     else {
-      confirm(tackler.name + " takes down " + runner.name + " and the Seahawks lose!  Oh what a heartbreak!");
+      replaceText(tackler.name + " takes down " + runner.name + " and the Seahawks lose!  Oh what a heartbreak!");
       runner.down = true;
     }
   };
 
+  // Helper function to replace the text in the text area and fade it back in
   function replaceText(message) {
-    $("p").fadeOut(600, function() {
-      $(this).text(message)
-      $(this).fadeIn();
+    $("p").delay(300).fadeOut(600, function() {
+      $("this").text(message);
+      console.log(message);
+      $("this").delay(500).fadeIn();
     });
   }
   // Define our runner/tackler.
@@ -67,18 +69,18 @@ $(function() {
   //alert("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot on his tail!")
 
   function startPlay() {
-    $("p").fadeOut(500).html("");
+    replaceText("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot in his tail!")
+
     // Start the play!
-    $("p").text("< /br> Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot in his tail!").fadeIn();
     while (RB.down === false && RB.fieldPosition < 100) {
       RB.run();
 
       if (RB.fieldPosition >= 100) { // Break the loop if RB is in the end zone
-        alert(RB.name + " SCORES!! The Seahawks win and the crowd goes WILD!!");
+        replaceText(RB.name + " SCORES!! The Seahawks win and the crowd goes WILD!!");
         break;
       }
 
-      alert(RB.name + " is at the " + RB.currentFieldPos() + " yard line! He's fighting hard...");
+      replaceText(RB.name + " is at the " + RB.currentFieldPos() + " yard line! He's fighting hard...");
       LB.run();
       runPlay(RB,LB);
     }
@@ -86,7 +88,6 @@ $(function() {
 
 
   $("#go").click(function() {
-      $(this).text("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot in his tail!")
-    //startPlay();
+    startPlay();
   })
 });
