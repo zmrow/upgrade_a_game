@@ -50,23 +50,22 @@ $(function() {
     }
   };
 
+  function fadeInCallback(message) {
+    $("this").text(message);
+    console.log(message);
+    $("this").fadeIn(400);
+  }
+
   // Helper function to replace the text in the text area and fade it back in
   function replaceText(message) {
     $("p").delay(300).fadeOut(600, function() {
-      $("this").text(message);
-      console.log(message);
-      $("this").delay(500).fadeIn();
+      fadeInCallback(message);
     });
   }
   // Define our runner/tackler.
   var RB = new Player("Marshawn", 8, 0, 7);
   var LB = new Player("Aldon", 5, 3, 0);
   yards = 100;
-
-  // Set the stage for our intense play....
-  //alert("The Seahawks are on the 49ers 20 yard line and need to score here to win the game!  Hit ok when you're ready to hike the ball!")
-
-  //alert("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot on his tail!")
 
   function startPlay() {
     replaceText("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot in his tail!")
