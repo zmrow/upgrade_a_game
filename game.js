@@ -63,16 +63,17 @@ $(function() {
     // $("p").delay(300).fadeOut(600, function() {
     //   console.log(message);
     //   $(this).text(message);
-    //   $(this).fadeIn(50).delay(300);
+    //   $(this).fadeIn(50);
     // });
 
-    setTimeout(function(){
-      $("section").append('<p>' + message +'</p>');
-    }, 1000)
+    // setTimeout(function(){
+    //   $("section").append('<p>' + message +'</p>'));
+    // }, 1000)
+    $('<p>' + message +'</p>').appendTo("section").hide().fadeIn(400);
   }
 
   function startPlay() {
-    replaceText("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot in his tail! (click 'Run' to continue!");
+    replaceText("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot in his tail! (click 'Run' to continue!)");
 
     $("#run").click(function() {
       RB.run();
@@ -81,12 +82,14 @@ $(function() {
 
       if (RB.down === true) {
         replaceText(LB.name + " takes down " + RB.name + " and the Seahawks lose!  Oh what a heartbreak!");
+        $("#run").hide();
       }
       else if (RB.down === false && RB.fieldPosition < 100) {
         replaceText(RB.name + " is at the " + RB.currentFieldPos() + " yard line! He's fighting hard...");
       }
       else {
         replaceText(RB.name + " SCORES!! The Seahawks win and the crowd goes WILD!!");
+        $("#run").hide();
       }
     })
   }
