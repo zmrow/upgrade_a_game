@@ -73,7 +73,7 @@ $(function() {
   }
 
   function startPlay() {
-    replaceText("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot in his tail! (click 'Run' to continue!)");
+    replaceText("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot on his tail! (click 'Run' to continue!)");
 
     $("#run").click(function() {
       RB.run();
