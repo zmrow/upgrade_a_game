@@ -32,6 +32,8 @@ $(function() {
     // Take absolute value of difference in runner/tackler field position.
     // If less than or equal to 5, tackler will try to tackle runner.
     diff = Math.abs(runner.fieldPosition - tackler.fieldPosition);
+    console.log("runner: " + runner.fieldPosition);
+    console.log("tackler: " + tackler.fieldPosition);
     if (diff <= 5) {
       attemptTackle(runner,tackler);
     }
@@ -45,48 +47,60 @@ $(function() {
       setRandomStats(runner, tackler);
     }
     else {
-      replaceText(tackler.name + " takes down " + runner.name + " and the Seahawks lose!  Oh what a heartbreak!");
+      // replaceText(tackler.name + " takes down " + runner.name + " and the Seahawks lose!  Oh what a heartbreak!");
       runner.down = true;
     }
   };
 
   function fadeInCallback(message) {
     $("this").text(message);
+    $("this").fadeIn(200);
     console.log(message);
-    $("this").fadeIn(400);
   }
 
   // Helper function to replace the text in the text area and fade it back in
   function replaceText(message) {
-    $("p").delay(300).fadeOut(600, function() {
-      fadeInCallback(message);
-    });
+    // $("p").delay(300).fadeOut(600, function() {
+    //   console.log(message);
+    //   $(this).text(message);
+    //   $(this).fadeIn(50).delay(300);
+    // });
+
+    setTimeout(function(){
+      $("section").append('<p>' + message +'</p>');
+    }, 1000)
   }
-  // Define our runner/tackler.
-  var RB = new Player("Marshawn", 8, 0, 7);
-  var LB = new Player("Aldon", 5, 3, 0);
-  yards = 100;
 
   function startPlay() {
-    replaceText("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot in his tail!")
+    replaceText("Looks like the handoff goes to Marshawn Lynch and linebacker Aldon Smith is hot in his tail! (click 'Run' to continue!");
 
-    // Start the play!
-    while (RB.down === false && RB.fieldPosition < 100) {
+    $("#run").click(function() {
       RB.run();
-
-      if (RB.fieldPosition >= 100) { // Break the loop if RB is in the end zone
-        replaceText(RB.name + " SCORES!! The Seahawks win and the crowd goes WILD!!");
-        break;
-      }
-
-      replaceText(RB.name + " is at the " + RB.currentFieldPos() + " yard line! He's fighting hard...");
       LB.run();
       runPlay(RB,LB);
-    }
-  };
 
+      if (RB.down === true) {
+        replaceText(LB.name + " takes down " + RB.name + " and the Seahawks lose!  Oh what a heartbreak!");
+      }
+      else if (RB.down === false && RB.fieldPosition < 100) {
+        replaceText(RB.name + " is at the " + RB.currentFieldPos() + " yard line! He's fighting hard...");
+      }
+      else {
+        replaceText(RB.name + " SCORES!! The Seahawks win and the crowd goes WILD!!");
+      }
+    })
+  }
 
-  $("#go").click(function() {
+  // Define our runner/tackler.
+  var RB = new Player("Marshawn", 8, 0, 7);
+  var LB = new Player("Aldon", 6, 5, 0);
+  yards = 100;
+
+  $("#run").hide();
+
+  $("#hike").click(function() {
+    $("#hike").hide();
+    $("#run").show();
     startPlay();
   })
 });

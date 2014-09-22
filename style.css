@@ -14,13 +14,19 @@ section {
   margin-right: auto;
 }
 
+section p {
+  margin: 3 auto;
+}
+
 .wrapper {
+  position: absolute;
   text-align: center;
   width: 100%;
   height: 31px;
+  margin-top: 20px;
 }
 
-#go {
+.btn {
   width: 60px;
   height: 30px;
   /*display: block;*/
@@ -40,7 +46,7 @@ section {
   margin: 8px 8px;
 }
 
-#go:hover {
+.btn:hover {
   background: #1ab558;
   text-decoration: none;
 }
